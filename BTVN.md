@@ -19,7 +19,7 @@
     
 # ThucHienTruyVan
 
-**1 Lấy ra thông tin các diễn viễn đóng phim ACADEMY DINOSAUR
+**1 Lấy ra thông tin các diễn viễn đóng phim ACADEMY DINOSAUR**
 
     SELECT actor.actor_id,actor.first_name, actor.last_name
     FROM sakila.film
@@ -27,18 +27,18 @@
     INNER JOIN sakila.actor ON film_actor.actor_id = actor.actor_id
     WHERE title = 'ACADEMY DINOSAUR';
     
-**2 Lấy ra title, description, release_year, length, rating của các bộ phim có rating là G, đếm xem mỗi phim có bao nhiêu diễn viên tham gia
+**2 Lấy ra title, description, release_year, length, rating của các bộ phim có rating là G, đếm xem mỗi phim có bao nhiêu diễn viên tham gia**
 
-    SELECT  title, description, release_year, length, rating, count(actor.actor_id) 
-    from sakila.film 
+    SELECT  title, description, release_year, length, rating, COUNT(actor.actor_id) 
+    FROM sakila.film 
     INNER JOIN sakila.film_actor ON film.film_id = film_actor.film_id 
     INNER JOIN sakila.actor ON film_actor.actor_id = actor.actor_id
-    where rating = 'G'
-    group by film.film_id;
+    WHERE rating = 'G'
+    GROUP BY film.film_id;
 
-**3 Tính trung bình cộng rental_rate của các phim có CHRISTIAN GABLE tham gia
+**3 Tính trung bình cộng rental_rate của các phim có CHRISTIAN GABLE tham gia**
 
-    SELECT  avg(rental_rate)
-    from sakila.film
+    SELECT  AVG(rental_rate)
+    FROM sakila.film
     INNER JOIN sakila.film_actor ON film.film_id = film_actor.film_id 
-    where film_actor.actor_id = (select actor.actor_id from sakila.actor where actor.first_name = 'CHRISTIAN' and actor.last_name = 'GABLE')    
+    WHERE film_actor.actor_id = (SELECT actor.actor_id FROM sakila.actor WHERE actor.first_name = 'CHRISTIAN' AND actor.last_name = 'GABLE')    
